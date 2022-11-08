@@ -1,0 +1,113 @@
+commit c2a67629a57e2b227c99ddf90e96d1683eb0ce2b
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:59:44 2022 +0200
+
+    removed file 1 renamed file 2
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c67e69945a81a6683f488bbe14bb0a15c0cbec0c
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:57:19 2022 +0200
+
+    added tiedostoja dir and files
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 158645bacbe8f8c68f36de79be015fde2774725a
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:53:41 2022 +0200
+
+    changes to eka and kolmas with -p
+
+ eka.txt    | 1 +
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+commit 42f944576b54b0229dce4a2b433be0cf8f51ff73
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:52:12 2022 +0200
+
+    Changed tiedosto name to eka
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 870067a1f6399867a4bdefafa13b160ca8dc4766
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:51:20 2022 +0200
+
+    removed toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit c0bea50365d6841857b06021857740c66fc24b10
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:49:29 2022 +0200
+
+    modified tiedosto contents
+
+ tiedosto.txt | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
+
+commit 00dff2d842c63ac3af251cc835bc573b84daacd3
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:48:37 2022 +0200
+
+    Addede text to tiedosto
+
+ tiedosto.txt | 158 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 158 insertions(+)
+
+commit f7051492da83ef7d877485ce1c8787de1c9e40f8
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:45:01 2022 +0200
+
+    added dir
+
+ stuff/asd.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit cb02f19b70eef43c56c4a4daf6fcfb39aad1fdca
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:44:15 2022 +0200
+
+    edited 2 files
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 67f227b3fefce91a151930c306ba23eac92f1160
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:43:21 2022 +0200
+
+    lisätty kolmas
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit cfa472fea36c40addbd8601ba06d9238a8ef9872
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:42:34 2022 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 573315af3b5f6194cbd2b55d92fd25a99bbeee8a
+Author: Teemu Tiljander <teemutil@gmail.com>
+Date:   Tue Nov 8 14:41:25 2022 +0200
+
+    tiedosto luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
