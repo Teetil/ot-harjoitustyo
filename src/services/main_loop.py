@@ -3,6 +3,7 @@ from objects.player import Player
 from ui.game_field import FieldRenderer
 from services.stage import Stage
 
+
 class MainLoop:
     """
     """
@@ -12,7 +13,7 @@ class MainLoop:
         self._player = Player(500, 500)
         self._renderer = FieldRenderer(window)
         self._stage = Stage(window)
-        
+
     def loop(self) -> None:
         while True:
             if not self._event_handler():

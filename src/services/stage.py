@@ -7,7 +7,7 @@ class Stage():
         self._waveHandler = WaveHandler(Random())
         self.enemies = []
         self._fieldSize = window.get_width()
-    
+
     def update(self, current_time):
         if self._waveHandler.should_spawn(current_time):
             self.enemies += self._waveHandler.spawnWave(self._fieldSize)
