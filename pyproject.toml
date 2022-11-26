@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ot-harjoitustyo"
+version = "0.1.0"
+description = "Ohjelmistotekniikan harjoitustyö"
+authors = ["Teetil <teemutil@gmail.com>"]
+readme = "README.md"
+packages = [{include = "ot_harjoitustyo"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+pygame = "^2.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
