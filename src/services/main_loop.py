@@ -15,6 +15,7 @@ class MainLoop:
         while True:
             if self._event_handler() == False:
                 break
+            self._player.movement(pygame.key.get_pressed())
             self._renderer.render_field(self._player)
             self._clock.tick(60)
 
