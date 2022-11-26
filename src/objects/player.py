@@ -1,15 +1,13 @@
-import pygame
-
 class Player():
 
-    def __init__(self, posX, posY) -> None:
+    def __init__(self, posX : int, posY : int) -> None:
         self._health = 100
         self.moveSpeed = 3
         self.damage = 1
         self.posX = posX
         self.posY = posY
 
-    def movement(self, pressed_key):
+    def movement(self, pressed_key : list):
         if pressed_key[97]:
             self.posX -= self.moveSpeed
         if pressed_key[100]:
