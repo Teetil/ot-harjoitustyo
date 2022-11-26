@@ -12,3 +12,39 @@
 [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
 
 
+## Ohjelman käyttäminen
+
+### Asenna riippuvuudet komennolla
+
+```bash
+poetry install
+```
+
+### Aloita sovellus komennolla
+
+```bash
+poetry run invoke start
+```
+### Testit voi suorittaa komennolla
+
+```bash
+poetry run invoke test
+```
+
+### Testikattavuus
+
+Testikattavuusraportin voi luoda komennolla
+
+```bash
+poetry run invoke coverage-report
+```
+
+Raportti löytyy htmlcov hakemistosta
+
+### Pylint
+
+Tiedoston .pylintrc määrittelemät tarkastukset pystyy suorittamaan komennolla
+
+```bash
+poetry run invoke lint
+```
