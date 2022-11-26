@@ -1,18 +1,18 @@
 class Player():
 
-    def __init__(self, posX: int, posY: int, health=100, movespeed=3, damage=1) -> None:
+    def __init__(self, pos_x: int, pos_y: int, health=100, move_speed=3, damage=1) -> None:
         self._health = health
-        self.moveSpeed = movespeed
+        self.move_speed = move_speed
         self.damage = damage
-        self.posX = posX
-        self.posY = posY
+        self.pos_x = pos_x
+        self.pos_y = pos_y
 
     def movement(self, pressed_key: list):
         if pressed_key[97]:
-            self.posX -= self.moveSpeed
+            self.pos_x -= self.move_speed
         if pressed_key[100]:
-            self.posX += self.moveSpeed
+            self.pos_x += self.move_speed
         if pressed_key[119]:
-            self.posY -= self.moveSpeed
+            self.pos_y -= self.move_speed
         if pressed_key[115]:
-            self.posY += self.moveSpeed
+            self.pos_y += self.move_speed

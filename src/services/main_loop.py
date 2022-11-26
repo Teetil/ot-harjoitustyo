@@ -6,6 +6,7 @@ from services.stage import Stage
 
 class MainLoop:
     """
+    Luokka, joka pyörittää peliä
     """
 
     def __init__(self, window) -> None:
@@ -25,7 +26,7 @@ class MainLoop:
 
     def _event_handler(self) -> bool:
         for event in pygame.event.get():
-            if event.type == 12 or event.type == 256:
+            if event.type in (12, 256):
                 return False
             if event.type == 2:
                 if event.dict["key"] == 27:
