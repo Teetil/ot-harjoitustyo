@@ -1,11 +1,14 @@
-# OTSIKKO
+# Ohjelmistotekniikka harjoitustyö
+## Uni Survivors
 
-Normaali teksti 
+### Dokumentaatio 
 
-*Kursivoitu teksti*
+[Changelog](dokumentaatio/changelog.md)
 
-**Liahavaa tesktiä**
+[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
-***Molempia tekstejä***
+[Tyäaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 
-[gitlog](laskarit/viikko1/gitlog.txt)
+[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+
+
