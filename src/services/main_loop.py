@@ -24,8 +24,11 @@ class MainLoop:
 
     def _event_handler(self) -> bool:
         for event in pygame.event.get():
-            if event.type == 12:
+            if event.type == 12 or event.type == 256:
                 return False
+            if event.type == 2:
+                if event.dict["key"] == 27:
+                    return False
         return True
 
     def get_time(self) -> int:
