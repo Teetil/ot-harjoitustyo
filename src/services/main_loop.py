@@ -13,7 +13,7 @@ class MainLoop:
         self._clock = pygame.time.Clock()
         self._player = Player(500, 500)
         self._renderer = FieldRenderer(window)
-        self._stage = Stage(window)
+        self._stage = Stage(window, self._player)
 
     def loop(self) -> None:
         while True:
