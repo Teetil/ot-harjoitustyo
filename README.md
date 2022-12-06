@@ -10,6 +10,7 @@
 [Tyäaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 
 [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+[Julkaisu 1.0](https://github.com/Teetil/ot-harjoitustyo/releases/tag/viikko5)
 
 
 ## Ohjelman käyttäminen
