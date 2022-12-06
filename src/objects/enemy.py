@@ -9,9 +9,11 @@ class Enemy():
     def update(self, player):
         self.move(player)
         self.damage(player)
+        if self.health <= 0:
+            return True
 
     def move(self, player) -> None:
-        dirvect = pygame.math.Vector2(player.rect.x- self.rect.x, player.rect.y - self.rect.y)
+        dirvect = pygame.math.Vector2(player.rect.centerx- self.rect.centerx, player.rect.centery - self.rect.centery)
         if dirvect.length() == 0:
             return False
         dirvect.normalize()
@@ -22,3 +24,11 @@ class Enemy():
     def damage(self, player):
         if self.rect.colliderect(player.rect):
             player.health =  self._damage
+    
+    @property
+    def health(self):
+        return self._health
+    
+    @health.setter
+    def health(self, damage):
+        self._health -= damage

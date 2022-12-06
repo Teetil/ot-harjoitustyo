@@ -26,4 +26,3 @@ class Player():
         self._health -= damage
         if self._health <= 0:
             pass
-            #pygame.quit()
