@@ -16,3 +16,14 @@ class Player():
             self.rect.y -= self.move_speed
         if pressed_key[115]:
             self.rect.y += self.move_speed
+
+    @property
+    def health(self):
+        return self._health
+    
+    @health.setter
+    def health(self, damage):
+        self._health -= damage
+        if self._health <= 0:
+            pass
+            #pygame.quit()
