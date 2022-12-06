@@ -7,7 +7,7 @@ class FieldRenderer():
         self.window = window
         self.font = pygame.font.SysFont(None, 24)
 
-    def render_field(self, player, enemies: list, projectiles : list) -> None:
+    def render_field(self, player, enemies: list, projectiles: list) -> None:
         self.draw_window()
         self.draw_player(player)
         self.draw_enemy(enemies)
@@ -25,10 +25,9 @@ class FieldRenderer():
         for enemy in enemies:
             pygame.draw.rect(self.window, (100, 0, 0), enemy.rect)
 
-    def draw_projectiles(self, projectiles : list) -> None:
+    def draw_projectiles(self, projectiles: list) -> None:
         for projectile in projectiles:
             pygame.draw.rect(self.window, (0, 0, 100), projectile.rect)
-
 
     def draw_text(self, player):
         health_text = self.font.render(str(player.health), True, (255, 0, 0))

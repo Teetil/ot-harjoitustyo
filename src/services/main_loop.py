@@ -21,7 +21,8 @@ class MainLoop:
                 break
             self._player.movement(pygame.key.get_pressed())
             self._stage.update(self.get_time())
-            self._renderer.render_field(self._player, self._stage.enemies, self._stage.projectiles)
+            self._renderer.render_field(
+                self._player, self._stage.enemies, self._stage.projectiles)
             self._clock.tick(60)
 
     def _event_handler(self) -> bool:

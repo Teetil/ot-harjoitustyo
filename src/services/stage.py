@@ -28,4 +28,3 @@ class Stage():
         for projectile in self.projectiles:
             if projectile.update(self.enemies):
                 self.projectiles.remove(projectile)
-

@@ -1,4 +1,6 @@
 import pygame
+
+
 class Player():
 
     def __init__(self, pos_x: int, pos_y: int, health=100, move_speed=3, damage=1) -> None:
@@ -20,7 +22,7 @@ class Player():
     @property
     def health(self):
         return self._health
-    
+
     @health.setter
     def health(self, damage):
         self._health -= damage
