@@ -14,4 +14,4 @@ class Stage():
             self.enemies += self._wave_handler.spawn_wave(self._field_size)
             self._wave_handler.last_move = current_time
         for enemy in self.enemies:
-            enemy.move(self.player.pos_x, self.player.pos_y)
+            enemy.move(self.player)

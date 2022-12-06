@@ -16,10 +16,8 @@ class FieldRenderer():
         self.window.fill((80, 80, 80))
 
     def draw_player(self, player) -> None:
-        pygame.draw.rect(self.window, (0, 100, 0),
-                         (player.pos_x, player.pos_y, 30, 60))
+        pygame.draw.rect(self.window, (0, 100, 0), player.rect)
 
     def draw_enemy(self, enemies: list) -> None:
         for enemy in enemies:
-            pygame.draw.rect(self.window, (100, 0, 0),
-                             (enemy.pos_x, enemy.pos_y, 15, 15))
+            pygame.draw.rect(self.window, (100, 0, 0), enemy.rect)

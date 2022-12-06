@@ -4,12 +4,13 @@ class Enemy():
         self._health = health
         self._damage = damage
         self._move_speed = move_speed
-        self.pos_x = pos_x
-        self.pos_y = pos_y
+        self.rect = pygame.Rect(pos_x, pos_y, 15, 15)
 
-    def move(self, player_x, player_y):
-        dirvect = pygame.math.Vector2(player_x - self.pos_x, player_y - self.pos_y)
+    def move(self, player) -> None:
+        dirvect = pygame.math.Vector2(player.rect.x- self.rect.x, player.rect.y - self.rect.y)
         dirvect.normalize()
         dirvect.scale_to_length(self._move_speed)
-        self.pos_x += dirvect.x
-        self.pos_y += dirvect.y
+        self.rect.move_ip(dirvect)
+    
+    def damage(self, player):
+        pass
