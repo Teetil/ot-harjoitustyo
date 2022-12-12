@@ -10,12 +10,19 @@ class MainLoop:
     """
 
     def __init__(self, window) -> None:
+        """Luokan konstruktori, joka kutsutaan kun peli aloitetaan
+
+        Args:
+            window (pygame.surface): surface, jolle peli piirretään
+        """
         self._clock = pygame.time.Clock()
         self._player = Player(500, 500)
         self._renderer = FieldRenderer(window)
         self._stage = Stage(window, self._player)
 
     def loop(self) -> None:
+        """Pelin sydän. Loop joka pahatuu 60 kertaa sekunissa ja hoitaa suuren osan live toiminnalisuudesta
+        """
         while True:
             if not self._event_handler():
                 break
@@ -26,6 +33,11 @@ class MainLoop:
             self._clock.tick(60)
 
     def _event_handler(self) -> bool:
+        """Funktio hoitaa kaikki pelaajan tekemät asiat(eventit)
+
+        Returns:
+            bool: Funktio palauttaa False jos event on pygame.QUIT() ja sulkee main loopin
+        """
         for event in pygame.event.get():
             if event.type in (12, 256):
                 return False

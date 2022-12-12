@@ -4,7 +4,21 @@ from repositories.weapons import Wand
 
 
 class Stage():
+    """Luokka joka hoitaa pelikentän toiminallisuuden
+    """
     def __init__(self, window, player) -> None:
+        """Luokan konstruktori
+
+        Args:
+            window (pygame.surface): surface jolle peli piirretään
+            player (player): kentän pelaaja
+        Attributes:
+            wave_handler: luokka joka hoitaa vihollisten syntymisen
+            enemies: lista hengissä olevista vihollisista kentälä
+            weapons: pelaajan omaavat aseet
+            projectiles: lista elävistä projectileista
+            field_size: kentän koko
+        """
         self._wave_handler = WaveHandler(Random())
         self.enemies = []
         self.player = player
@@ -13,6 +27,11 @@ class Stage():
         self._field_size = window.get_width()
 
     def update(self, current_time):
+        """Päivittää kaikki kentällä olevat oliot
+
+        Args:
+            current_time (int): tämän hetkinen aika
+        """
         if self._wave_handler.should_spawn(current_time):
             self.enemies += self._wave_handler.spawn_wave(self._field_size)
             self._wave_handler.last_move = current_time
