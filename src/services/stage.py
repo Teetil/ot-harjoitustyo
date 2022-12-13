@@ -36,6 +36,9 @@ class Stage():
 
         Args:
             current_time (int): tämän hetkinen aika
+        
+        Returns:
+            bool: True jos pelaaja elossa, False jos kuollut
         """
         if self._wave_handler.should_spawn(current_time):
             self.enemies += self._wave_handler.spawn_wave(self._field_size, self.difficulty_mod)
@@ -53,3 +56,6 @@ class Stage():
         for projectile in self.projectiles:
             if projectile.update(self.enemies):
                 self.projectiles.remove(projectile)
+        if self.player.health <= 0:
+            return False
+        return True

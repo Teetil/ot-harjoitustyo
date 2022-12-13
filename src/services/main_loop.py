@@ -18,18 +18,22 @@ class MainLoop:
         """
         self._clock = pygame.time.Clock()
         self._player = Player(window.get_width() // 2, window.get_height() // 2, window)
-        _score_handler = ScoreHandler()
-        self._renderer = FieldRenderer(window, _score_handler)
-        self._stage = Stage(window, self._player, _score_handler)
+        self._score_handler = ScoreHandler()
+        self._renderer = FieldRenderer(window, self._score_handler)
+        self._stage = Stage(window, self._player, self._score_handler)
 
     def loop(self) -> None:
         """Pelin sydän. Loop joka pahatuu 60 kertaa sekunissa ja hoitaa suuren osan live toiminnalisuudesta
+
+        Returns:
+            int: Funktio palauttaa pelaajan pisteet jos hän kuolee, jos peli exitataan muulla tavalla palautta None
         """
         while True:
             if not self._event_handler():
-                break
+                return None
             self._player.movement(pygame.key.get_pressed())
-            self._stage.update(self.get_time())
+            if not self._stage.update(self.get_time()):
+                return self._score_handler.get_score()
             self._renderer.render_field(
                 self._player, self._stage.enemies, self._stage.projectiles)
             self._clock.tick(60)
