@@ -22,7 +22,7 @@ class Enemy():
         self._health = health
         self._damage = damage
         self._move_speed = move_speed
-        self.rect = pygame.Rect(pos_x, pos_y, 15, 15)
+        self.rect = pygame.Rect(pos_x, pos_y, 15, 30)
 
     def update(self, player):
         """funktio joka päivittää ja tarkastaa vihollisen tilan
