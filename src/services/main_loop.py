@@ -2,6 +2,7 @@ import pygame
 from objects.player import Player
 from ui.game_field import FieldRenderer
 from services.stage import Stage
+from repositories.score_handler import ScoreHandler
 
 
 class MainLoop:
@@ -17,8 +18,9 @@ class MainLoop:
         """
         self._clock = pygame.time.Clock()
         self._player = Player(window.get_width() // 2, window.get_height() // 2, window)
-        self._renderer = FieldRenderer(window)
-        self._stage = Stage(window, self._player)
+        _score_handler = ScoreHandler()
+        self._renderer = FieldRenderer(window, _score_handler)
+        self._stage = Stage(window, self._player, _score_handler)
 
     def loop(self) -> None:
         """Pelin sydän. Loop joka pahatuu 60 kertaa sekunissa ja hoitaa suuren osan live toiminnalisuudesta
