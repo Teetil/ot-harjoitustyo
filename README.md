@@ -13,6 +13,8 @@
 
 [Julkaisu 1.0](https://github.com/Teetil/ot-harjoitustyo/releases/tag/viikko5)
 
+[Julkaisu 2.0](https://github.com/Teetil/ot-harjoitustyo/releases/tag/viikko6)
+
 
 ## Ohjelman käyttäminen
 
