@@ -16,7 +16,7 @@ class MainLoop:
             window (pygame.surface): surface, jolle peli piirretään
         """
         self._clock = pygame.time.Clock()
-        self._player = Player(500, 500)
+        self._player = Player(window.get_width() // 2, window.get_height() // 2, window)
         self._renderer = FieldRenderer(window)
         self._stage = Stage(window, self._player)
 

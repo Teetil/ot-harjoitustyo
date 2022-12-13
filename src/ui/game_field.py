@@ -49,4 +49,4 @@ class FieldRenderer():
             player (player): pelaaja, jonka elämä piirtää
         """
         health_text = self.font.render(str(player.health), True, (255, 0, 0))
-        self.window.blit(health_text, (500, 50))
+        self.window.blit(health_text, (self.window.get_width() // 2, 50))
