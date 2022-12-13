@@ -4,13 +4,14 @@ import pygame
 class FieldRenderer():
     """Luokka joka renderöi pelikentän
     """
-    def __init__(self, window) -> None:
+    def __init__(self, window : pygame.surface, score_handler) -> None:
         """Luokan konstruktori
 
         Args:
             window (pygame.surface): alusta jolle pirtää pelikenttä
         """
         self.window = window
+        self._score_handler = score_handler
         self.font = pygame.font.SysFont(None, 24)
 
     def render_field(self, player, enemies: list, projectiles: list) -> None:
@@ -43,10 +44,13 @@ class FieldRenderer():
             pygame.draw.rect(self.window, (0, 0, 100), projectile.rect)
 
     def draw_text(self, player):
-        """Pirtää tällä hetkellä pelaajan elämän ruudulle, myöhemmin myös muuta tekstiä
+        """Pirtää pelaajan elämän ja pisteet näytölle
 
         Args:
             player (player): pelaaja, jonka elämä piirtää
         """
         health_text = self.font.render(str(player.health), True, (255, 0, 0))
-        self.window.blit(health_text, (self.window.get_width() // 2, 50))
+        score_text = self.font.render(str(self._score_handler.get_score()), True, (0, 250, 0))
+        self.window.blit(health_text, (self.window.get_width() // 2 - health_text.get_width() // 2, 150))
+        self.window.blit(score_text, (self.window.get_width() // 2 - score_text.get_width() // 2, 50))
+

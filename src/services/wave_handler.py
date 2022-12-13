@@ -4,7 +4,7 @@ from objects.enemy import Enemy
 class WaveHandler():
     """Luokka joka hoitaa vihollisten luomisen
     """
-    def __init__(self, randomizer) -> None:
+    def __init__(self, randomizer,) -> None:
         """Konstruktori
 
         Args:
@@ -12,15 +12,13 @@ class WaveHandler():
         Attributes:
             wave_delay: Kuinka pitkään odottaa vihollisaaltojen välissä
             wave_count: kuinka monta vihollista luoda per wave
-            difficulty_mod: numero, millä lisätä vihollisten nopeutta ja elämää
         """
         self._wave_delay = 2000
         self.last_move = 0
         self._wave_count = 5
-        self._difficulty_mod = 1
         self._randomizer = randomizer
 
-    def spawn_wave(self, field_size: int) -> list:
+    def spawn_wave(self, field_size: int, difficulty : int) -> list:
         """Luokka joka luo viholliset kentän reunoille
 
         Args:
