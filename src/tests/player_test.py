@@ -1,10 +1,12 @@
 import unittest
+import pygame
 from objects.player import Player
 
 
 class TestPlayer(unittest.TestCase):
     def setUp(self):
-        self.player = Player(100, 100)
+        window = pygame.Surface((1000, 1000))
+        self.player = Player(100, 100, window)
         self.test_key_list = [0] * 150
 
     def assert_coordinates_equal(self):

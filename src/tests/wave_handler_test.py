@@ -15,4 +15,4 @@ class TestWaveHandler(unittest.TestCase):
         self.wave_handler = WaveHandler(StubRandom(10))
 
     def test_spawn_count(self):
-        self.assertEqual(len(self.wave_handler.spawn_wave(1000)), 5)
+        self.assertEqual(len(self.wave_handler.spawn_wave(1000, 1)), 5)
