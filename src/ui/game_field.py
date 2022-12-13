@@ -4,7 +4,8 @@ import pygame
 class FieldRenderer():
     """Luokka joka renderöi pelikentän
     """
-    def __init__(self, window : pygame.surface, score_handler) -> None:
+
+    def __init__(self, window: pygame.surface, score_handler) -> None:
         """Luokan konstruktori
 
         Args:
@@ -50,7 +51,9 @@ class FieldRenderer():
             player (player): pelaaja, jonka elämä piirtää
         """
         health_text = self.font.render(str(player.health), True, (255, 0, 0))
-        score_text = self.font.render(str(self._score_handler.get_score()), True, (0, 250, 0))
-        self.window.blit(health_text, (self.window.get_width() // 2 - health_text.get_width() // 2, 150))
-        self.window.blit(score_text, (self.window.get_width() // 2 - score_text.get_width() // 2, 50))
-
+        score_text = self.font.render(
+            str(self._score_handler.get_score()), True, (0, 250, 0))
+        self.window.blit(health_text, (self.window.get_width() //
+                         2 - health_text.get_width() // 2, 150))
+        self.window.blit(score_text, (self.window.get_width() //
+                         2 - score_text.get_width() // 2, 50))

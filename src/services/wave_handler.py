@@ -4,6 +4,7 @@ from objects.enemy import Enemy
 class WaveHandler():
     """Luokka joka hoitaa vihollisten luomisen
     """
+
     def __init__(self, randomizer,) -> None:
         """Konstruktori
 
@@ -18,7 +19,7 @@ class WaveHandler():
         self._wave_count = 5
         self._randomizer = randomizer
 
-    def spawn_wave(self, field_size: int, difficulty : int) -> list:
+    def spawn_wave(self, field_size: int, difficulty: int) -> list:
         """Luokka joka luo viholliset kentän reunoille
 
         Args:
@@ -31,7 +32,7 @@ class WaveHandler():
         for dir_mod in range(self._wave_count):
             spawn_x, spawn_y = self._randomizer.random_spawn(
                 field_size, dir_mod)
-            spawned.append(Enemy(spawn_x, spawn_y))
+            spawned.append(Enemy(spawn_x, spawn_y, difficulty))
         return spawned
 
     def should_spawn(self, current_time: int) -> bool:

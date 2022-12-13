@@ -5,6 +5,7 @@ from objects.projectile import Projectile
 class Weapon:
     """Luokka mistä kaikku muut aseet perivät
     """
+
     def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce) -> None:
         """Luokan konstruktori
 
@@ -38,7 +39,7 @@ class Weapon:
         return current_time - self.last_shot >= self.cooldown
 
     def shoot_nearest(self, player, enemies: list):
-        """Funktio joka palauttaa projectilen, joka 
+        """Funktio joka palauttaa projectilen
 
         Args:
             player (player): Pelaaja koordinaateja varten
@@ -77,6 +78,7 @@ class Wand(Weapon):
     Args:
         Weapon (Weapon): luokka mistä ase perii
     """
+
     def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce) -> None:
         super().__init__(damage, cooldown, proj_speed, area, quantity, pierce)
 

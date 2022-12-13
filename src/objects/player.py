@@ -4,6 +4,7 @@ import pygame
 class Player():
     """Luokka joka hoitaa pelaajan käyttäytymisen
     """
+
     def __init__(self, pos_x: int, pos_y: int, window, health=100, move_speed=3, damage=1) -> None:
         """Luokan konstruktori
 
@@ -45,7 +46,7 @@ class Player():
         return self._health
 
     @health.setter
-    def health(self, damage : int):
+    def health(self, damage: int):
         """Pelaajan elämän asettava funktio, joka tarkistaa samalla kuolemisen
 
         Args:

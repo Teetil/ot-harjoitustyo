@@ -9,7 +9,8 @@ class Enemy():
         move_speed: Vihollisten nopeus
         rect: Vihollista kuvaava neliö pygamessa
     """
-    def __init__(self, pos_x, pos_y, health=10, damage=1, move_speed=2) -> None:
+
+    def __init__(self, pos_x, pos_y, difficulty, health=10, damage=1, move_speed=2) -> None:
         """luokan konstruktori, joka luo uuden vihollisen
 
         Args:
@@ -19,7 +20,7 @@ class Enemy():
             damage (int, optional): Defaults to 1.
             move_speed (int, optional): Defaults to 2.
         """
-        self._health = health
+        self._health = health * difficulty
         self._damage = damage
         self._move_speed = move_speed
         self.rect = pygame.Rect(pos_x, pos_y, 15, 30)
@@ -47,7 +48,7 @@ class Enemy():
 
         Returns:
             bool: Palauttaa True jos liikkuminen onnistui ja False jos ei tarvitse liikkua ja on jo pelaajan sisällä
-        """     
+        """
         dirvect = pygame.math.Vector2(
             player.rect.centerx - self.rect.centerx, player.rect.centery - self.rect.centery)
         if dirvect.length() == 0:

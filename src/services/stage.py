@@ -6,6 +6,7 @@ from repositories.weapons import Wand
 class Stage():
     """Luokka joka hoitaa pelikentän toiminallisuuden
     """
+
     def __init__(self, window, player, score_handler) -> None:
         """Luokan konstruktori
 
@@ -36,12 +37,13 @@ class Stage():
 
         Args:
             current_time (int): tämän hetkinen aika
-        
+
         Returns:
             bool: True jos pelaaja elossa, False jos kuollut
         """
         if self._wave_handler.should_spawn(current_time):
-            self.enemies += self._wave_handler.spawn_wave(self._field_size, self.difficulty_mod)
+            self.enemies += self._wave_handler.spawn_wave(
+                self._field_size, self.difficulty_mod)
             self._wave_handler.last_move = current_time
         for enemy in self.enemies:
             if enemy.update(self.player):

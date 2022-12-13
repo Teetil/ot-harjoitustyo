@@ -4,7 +4,8 @@ import pygame
 class Projectile:
     """Luokka joka hoitaa pelaajan aseiden ampumien projectilejen toiminnallisuuden
     """
-    def __init__(self, pos_x: int, pos_y: int, vector: pygame.Vector2, damage: int, pierce: int, proj_speed : int, area: int) -> None:
+
+    def __init__(self, pos_x: int, pos_y: int, vector: pygame.Vector2, damage: int, pierce: int, proj_speed: int, area: int) -> None:
         """Luokan konstruktori
 
         Args:
@@ -13,7 +14,7 @@ class Projectile:
             vector (pygame.Vector2): vectori lähimpään viholliseen, jonka mukaan liikkua
             damage (int): vahingon määrä viholliseen
             pierce (int): kuinka moneen viholliseen pojectile voi osua ennen kuolemaa
-            proj_speed (int): projectilen nopeus    
+            proj_speed (int): projectilen nopeus
             area (int): Projectilen koko
         """
         self.rect = pygame.Rect(pos_x, pos_y, area, area)
@@ -23,7 +24,7 @@ class Projectile:
         self._proj_speed = proj_speed
         self._hitlist = []
 
-    def update(self, enemies : list):
+    def update(self, enemies: list):
         """Funktio joka hoitaa projectilen tilan muuttamisen
 
         Args:
