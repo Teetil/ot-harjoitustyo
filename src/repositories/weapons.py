@@ -91,3 +91,8 @@ class Fireball(Weapon):
         self.color = (255, 0, 0)
         self.proj_attrs["explode"] = True
 
+class AcidPool(Weapon):
+    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce,) -> None:
+        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce)
+        self.color = (0, 200, 0)
+        self.proj_attrs["pool"] = True

@@ -32,7 +32,6 @@ class Stage():
         self._level_handler = LevelHandler()
         self.enemies = []
         self.player = player
-        #self.weapons = [Wand(10, 700, 10, 20, 1, 2)]
         self.weapons = [Fireball(20, 1400, 5, 40, 1, 1)]
         self.projectiles = []
         self._experience_gems = []

@@ -30,11 +30,15 @@ class Projectile:
             bool: Palauttaa True jos projectile kuolee
         """
         self.move()
-        if self.hit(enemies) and "explode" in self._proj_attrs:
+        if self.hit(enemies):
+            if "explode" in self._proj_attrs and self._proj_attrs["explode"] == True:
                 self.explode()
                 return False
+            if "pool" in self._proj_attrs and self._proj_attrs["pool"] == True:
+                self.pool()
+                return False
         if "explode" in self._proj_attrs and self._proj_attrs["explode"] == False:
-            self._proj_attrs["pierce"] -= 1
+            self._proj_attrs["pierce"] -= 25
         if self._proj_attrs["pierce"] <= 0:
             return True
         return False
@@ -64,10 +68,13 @@ class Projectile:
 
 
     def explode(self,):
-        if self._proj_attrs["explode"] == True:
-            self.rect.inflate_ip(self._proj_attrs["area"] * 2, self._proj_attrs["area"] * 2)
-            self._proj_attrs["proj_speed"] = 0.1
-            self._proj_attrs["pierce"] = 2
-            self._proj_attrs["explode"] = False
+        self.rect.inflate_ip(self._proj_attrs["area"] * 2, self._proj_attrs["area"] * 2)
+        self._proj_attrs["proj_speed"] = 0.1
+        self._proj_attrs["pierce"] = 100
+        self._proj_attrs["explode"] = False
 
-
+    def pool(self):
+        self.rect.inflate_ip(self._proj_attrs["area"] * 1.5, self._proj_attrs["area"] * 1.5)
+        self._proj_attrs["proj_speed"] = 0.1
+        self._proj_attrs["pierce"] = 10
+        self._proj_attrs["pool"] = False
