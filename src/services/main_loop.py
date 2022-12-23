@@ -36,7 +36,7 @@ class MainLoop:
             if not self._stage.update(self.get_time()):
                 return self._score_handler.get_score()
             self._renderer.render_field(
-                self._player, self._stage.enemies, self._stage.projectiles)
+                self._player, self._stage.enemies, self._stage.projectiles, self._stage._experience_gems)
             self._clock.tick(60)
 
     def _event_handler(self) -> bool:

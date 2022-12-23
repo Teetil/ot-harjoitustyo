@@ -15,7 +15,7 @@ class FieldRenderer():
         self._score_handler = score_handler
         self.font = pygame.font.SysFont(None, 24)
 
-    def render_field(self, player, enemies: list, projectiles: list) -> None:
+    def render_field(self, player, enemies: list, projectiles: list, experience_gems : list) -> None:
         """General funktio pelikentän piirtämiselle, joka kutsuu kaikki muut piirtofunktiot
 
         Args:
@@ -27,6 +27,7 @@ class FieldRenderer():
         self.draw_player(player)
         self.draw_enemy(enemies)
         self.draw_projectiles(projectiles)
+        self.draw_experience(experience_gems)
         self.draw_text(player)
         pygame.display.update()
 
@@ -43,6 +44,11 @@ class FieldRenderer():
     def draw_projectiles(self, projectiles: list) -> None:
         for projectile in projectiles:
             pygame.draw.rect(self.window, (0, 0, 100), projectile.rect)
+    
+    def draw_experience(self, experience_gems : list) -> None:
+        for experience in experience_gems:
+            pygame.draw.rect(self.window, (0, 50, 100), experience.rect)
+
 
     def draw_text(self, player):
         """Pirtää pelaajan elämän ja pisteet näytölle
