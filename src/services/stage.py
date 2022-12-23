@@ -1,7 +1,7 @@
 from services.wave_handler import WaveHandler
 from services.randomizer import Random
 from services.level_handler import LevelHandler
-from repositories.weapons import Wand
+from repositories.weapons import *
 from objects.experience import Experience
 
 class Stage():
@@ -26,15 +26,17 @@ class Stage():
             difficulty_mod: numero, millä lisätä vihollisten nopeutta ja elämää
 
         """
+        self._window = window
         self._wave_handler = WaveHandler(Random())
         self._score_handler = score_handler
         self._level_handler = LevelHandler()
         self.enemies = []
         self.player = player
-        self.weapons = [Wand(10, 700, 10, 20, 1, 2)]
+        #self.weapons = [Wand(10, 700, 10, 20, 1, 2)]
+        self.weapons = [Fireball(20, 1400, 5, 40, 1, 1)]
         self.projectiles = []
         self._experience_gems = []
-        self._field_size = window.get_width()
+        self._field_size = self._window.get_width()
         self.difficulty_mod = 1
 
     def update(self, current_time):

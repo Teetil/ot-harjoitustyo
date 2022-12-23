@@ -6,7 +6,7 @@ class Weapon:
     """Luokka mistä kaikku muut aseet perivät
     """
 
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce) -> None:
+    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, color = (255, 255, 255)) -> None:
         """Luokan konstruktori
 
         Args:
@@ -19,12 +19,13 @@ class Weapon:
         Attributes:
             last_shot: aika milloin viimeinen ammunta tapahtui
         """
-        self.damage = damage
+        self.proj_attrs = {}
+        self.proj_attrs["damage"] = damage
+        self.proj_attrs["proj_speed"] = proj_speed
+        self.proj_attrs["area"] = area
+        self.proj_attrs["pierce"] = pierce
         self.cooldown = cooldown
-        self.proj_speed = proj_speed
-        self.area = area
         self.quantity = quantity
-        self.pierce = pierce
         self.last_shot = 0
 
     def should_shoot(self, current_time: int) -> bool:
@@ -51,7 +52,7 @@ class Weapon:
         enemy = self.get_nearest(player, enemies)
         if not enemy:
             return None
-        return Projectile(player.rect.centerx, player.rect.centery, enemy, self.damage, self.pierce, self.proj_speed, self.area)
+        return Projectile((player.rect.centerx, player.rect.centery), enemy, self.color, self.proj_attrs)
 
     def get_nearest(self, player, enemies):
         """Funktio joka palauttaa vektorin lähintä vihollista kohti
@@ -81,8 +82,12 @@ class Wand(Weapon):
 
     def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce) -> None:
         super().__init__(damage, cooldown, proj_speed, area, quantity, pierce)
+        self.color = (0, 255, 255)
 
 
 class Fireball(Weapon):
     def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce) -> None:
         super().__init__(damage, cooldown, proj_speed, area, quantity, pierce)
+        self.color = (255, 0, 0)
+        self.proj_attrs["explode"] = True
+

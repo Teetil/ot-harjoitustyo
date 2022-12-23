@@ -5,23 +5,19 @@ class Projectile:
     """Luokka joka hoitaa pelaajan aseiden ampumien projectilejen toiminnallisuuden
     """
 
-    def __init__(self, pos_x: int, pos_y: int, vector: pygame.Vector2, damage: int, pierce: int, proj_speed: int, area: int) -> None:
+    def __init__(self, coordinates : tuple, vector: pygame.Vector2, color : tuple, proj_attrs : dict) -> None:
         """Luokan konstruktori
 
         Args:
-            pos_x (int): x koordinaatti
-            pos_y (int): y koordinaatti
+            coordinates (tuple): tuple muotoa (pos_x, pos_y)
             vector (pygame.Vector2): vectori lähimpään viholliseen, jonka mukaan liikkua
-            damage (int): vahingon määrä viholliseen
-            pierce (int): kuinka moneen viholliseen pojectile voi osua ennen kuolemaa
-            proj_speed (int): projectilen nopeus
-            area (int): Projectilen koko
+            color (tuple) : tuple joka sisältää projektilen rendröintivärin muodossa (R, G, B)
+            proj_attrs (dict) : dictionary joka sisältää projectilen attribuutit kuten damagen ja nopeuden
         """
-        self.rect = pygame.Rect(pos_x, pos_y, area, area)
+        self.rect = pygame.Rect(coordinates[0], coordinates[1], proj_attrs["area"], proj_attrs["area"])
         self._vector = vector
-        self._damage = damage
-        self._pierce = pierce
-        self._proj_speed = proj_speed
+        self._proj_attrs = dict(proj_attrs)
+        self.color = color
         self._hitlist = []
 
     def update(self, enemies: list):
@@ -34,8 +30,12 @@ class Projectile:
             bool: Palauttaa True jos projectile kuolee
         """
         self.move()
-        self.hit(enemies)
-        if self._pierce == 0:
+        if self.hit(enemies) and "explode" in self._proj_attrs:
+                self.explode()
+                return False
+        if "explode" in self._proj_attrs and self._proj_attrs["explode"] == False:
+            self._proj_attrs["pierce"] -= 1
+        if self._proj_attrs["pierce"] <= 0:
             return True
         return False
 
@@ -43,17 +43,31 @@ class Projectile:
         """Liikuttaa projectilea vektoria pitkin nopeudella
         """
         self._vector.normalize()
-        self._vector.scale_to_length(self._proj_speed)
+        self._vector.scale_to_length(self._proj_attrs["proj_speed"])
         self.rect.move_ip(self._vector)
 
     def hit(self, enemies):
         """Funktio joka katsoo onko projecile osumassa viholliseen, tällä hetkellä
 
         Args:
-            enemies (lis): lista vihollisia
+            enemies (list): lista vihollisia
         """
+        has_hit = False
         collidelist = self.rect.collidelistall(enemies)
         for index in collidelist:
-            if self._pierce > 0:
-                self._pierce -= 1
-                enemies[index].health = self._damage
+            if self._proj_attrs["pierce"] > 0 and enemies[index] not in self._hitlist:
+                self._proj_attrs["pierce"] -= 1
+                enemies[index].health = self._proj_attrs["damage"]
+                self._hitlist.append(enemies.index)
+                has_hit = True
+        return has_hit
+
+
+    def explode(self,):
+        if self._proj_attrs["explode"] == True:
+            self.rect.inflate_ip(self._proj_attrs["area"] * 2, self._proj_attrs["area"] * 2)
+            self._proj_attrs["proj_speed"] = 0.1
+            self._proj_attrs["pierce"] = 2
+            self._proj_attrs["explode"] = False
+
+

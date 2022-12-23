@@ -24,9 +24,9 @@ class FieldRenderer():
             projectiles (list): projectilet jotka pirtää
         """
         self.draw_window()
+        self.draw_projectiles(projectiles)
         self.draw_player(player)
         self.draw_enemy(enemies)
-        self.draw_projectiles(projectiles)
         self.draw_experience(experience_gems)
         self.draw_text(player)
         pygame.display.update()
@@ -43,7 +43,7 @@ class FieldRenderer():
 
     def draw_projectiles(self, projectiles: list) -> None:
         for projectile in projectiles:
-            pygame.draw.rect(self.window, (0, 0, 100), projectile.rect)
+            pygame.draw.rect(self.window, projectile.color, projectile.rect)
     
     def draw_experience(self, experience_gems : list) -> None:
         for experience in experience_gems:
