@@ -8,4 +8,4 @@
 - 23.12 4h Uusien aseiden lisääminen ja xp:n saaminen vihollisista
 
 
-Summa: 16h
+Summa: 20h
