@@ -9,9 +9,3 @@ class ScoreHandler():
 
     def get_score(self):
         return self._score
-
-    def save_score(self):
-        pass
-
-    def load_score(self):
-        pass

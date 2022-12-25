@@ -22,3 +22,9 @@ class TestEnemy(unittest.TestCase):
     def test_dying_works(self):
         self.test_enemy.health = 10
         self.assertEqual(True, self.test_enemy.update(self.player))
+    
+    def difficulty_scaling_works(self):
+        new_enemy = Enemy(10, 10, 5)
+        self.assertEqual(50, new_enemy.health)
+        self.assertEqual(2.8, new_enemy._move_speed)
+        self.assertEqual(3.6, new_enemy._damage)

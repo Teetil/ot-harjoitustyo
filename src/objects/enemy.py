@@ -10,7 +10,7 @@ class Enemy():
         rect: Vihollista kuvaava neliö pygamessa
     """
 
-    def __init__(self, pos_x, pos_y, difficulty, health=10, damage=1, move_speed=1.8) -> None:
+    def __init__(self, pos_x, pos_y, difficulty, health=10, damage=0.6, move_speed=1.8) -> None:
         """luokan konstruktori, joka luo uuden vihollisen
 
         Args:
@@ -21,7 +21,7 @@ class Enemy():
             move_speed (int, optional): Defaults to 2.
         """
         self._health = health * difficulty
-        self._damage = damage + difficulty - 1
+        self._damage = damage + 0.4 * difficulty
         self._move_speed = move_speed + 0.2 * difficulty
         self.rect = pygame.Rect(pos_x, pos_y, 15, 30)
 
