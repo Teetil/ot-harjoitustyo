@@ -11,6 +11,10 @@
 
 [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
 
+[Käyttöohje](dokumentaatio/Kayttoohje.md)
+
+[Testaus](dokumentaatio/testaus.md)
+
 [Julkaisu 1.0](https://github.com/Teetil/ot-harjoitustyo/releases/tag/viikko5)
 
 [Julkaisu 2.0](https://github.com/Teetil/ot-harjoitustyo/releases/tag/viikko6)
