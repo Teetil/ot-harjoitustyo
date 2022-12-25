@@ -36,9 +36,9 @@ class Stage():
         weapon_attrs = self.load_weapon_attrs()
 
         self.weapons = [
-            Fireball(weapon_attrs["Fireball"]),
-            AcidPool(weapon_attrs["AcidPool"]),
-            Wand(weapon_attrs["Wand"], active=True)
+            Fireball(weapon_attrs["Fireball"], Random()),
+            AcidPool(weapon_attrs["AcidPool"], Random()),
+            Wand(weapon_attrs["Wand"], Random(), active=True)
         ]
         self.projectiles = []
         self.experience_gems = []

@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, choice
 
 
 class Random():
@@ -9,3 +9,6 @@ class Random():
         else:
             spawn_x = field_size - 10 + randint(-20, 0)
         return spawn_x, spawn_y
+
+    def choice_list(self, list):
+        return choice(list)

@@ -3,12 +3,11 @@ from math import ceil
 import pygame
 from objects.projectile import Projectile
 
-
 class Weapon:
     """Luokka mistä kaikku muut aseet perivät
     """
 
-    def __init__(self, weapon_attrs, active=False, color=None) -> None:
+    def __init__(self, weapon_attrs, randomizer, active=False, color=None,) -> None:
         """Luokan konstruktori
 
         Args:
@@ -27,6 +26,7 @@ class Weapon:
         self.last_shot = 0
         self.active = active
         self.color = color
+        self._randomizer = randomizer
 
     def should_shoot(self, current_time: int) -> bool:
         """Funktio joka palauttaa true jos aseen pitöisi ampua
@@ -82,7 +82,7 @@ class Weapon:
     def upgrade_random(self):
         var_list = list(self.proj_attrs.keys())
         var_list.extend(["cooldown", "quantity"])
-        var_to_upgrade = choice(var_list)
+        var_to_upgrade = self._randomizer.choice_list(var_list)
         if var_to_upgrade == "cooldown":
             self.cooldown *= 0.9
             return
@@ -99,20 +99,20 @@ class Wand(Weapon):
         Weapon (Weapon): luokka mistä ase perii
     """
 
-    def __init__(self, weapon_attrs, active=False) -> None:
-        super().__init__(weapon_attrs, active)
+    def __init__(self, weapon_attrs, randomizer, active=False) -> None:
+        super().__init__(weapon_attrs, randomizer, active)
         self.color = (0, 255, 255)
 
 
 class Fireball(Weapon):
-    def __init__(self, weapon_attrs, active=False) -> None:
-        super().__init__(weapon_attrs, active)
+    def __init__(self, weapon_attrs, randomizer, active=False) -> None:
+        super().__init__(weapon_attrs, randomizer,active)
         self.color = (255, 0, 0)
         self.proj_attrs["explode"] = True
 
 
 class AcidPool(Weapon):
-    def __init__(self, weapon_attrs, active=False) -> None:
-        super().__init__(weapon_attrs, active)
+    def __init__(self, weapon_attrs, randomizer, active=False) -> None:
+        super().__init__(weapon_attrs, randomizer,active)
         self.color = (0, 200, 0)
         self.proj_attrs["pool"] = True
