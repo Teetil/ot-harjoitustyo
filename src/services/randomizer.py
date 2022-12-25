@@ -10,5 +10,5 @@ class Random():
             spawn_x = field_size - 10 + randint(-20, 0)
         return spawn_x, spawn_y
 
-    def choice_list(self, list):
-        return choice(list)
+    def choice_list(self, lis):
+        return choice(lis)

@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import Mock
 from services.level_handler import LevelHandler
 
+
 class TestLevelHandler(unittest.TestCase):
     def setUp(self) -> None:
         self.test_handler = LevelHandler()

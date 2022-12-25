@@ -30,13 +30,13 @@ class Projectile:
         Returns:
             bool: Palauttaa True jos projectile kuolee
         """
-        self.move()
-        if self.hit(enemies):
+        self._move()
+        if self._hit(enemies):
             if "explode" in self._proj_attrs and self._proj_attrs["explode"]:
-                self.explode()
+                self._explode()
                 return False
             if "pool" in self._proj_attrs and self._proj_attrs["pool"]:
-                self.pool()
+                self._pool()
                 return False
         if "explode" in self._proj_attrs and not self._proj_attrs["explode"]:
             self._proj_attrs["pierce"] -= 25
@@ -44,14 +44,14 @@ class Projectile:
             return True
         return False
 
-    def move(self):
+    def _move(self):
         """Liikuttaa projectilea vektoria pitkin nopeudella
         """
         self._vector.normalize()
         self._vector.scale_to_length(self._proj_attrs["proj_speed"])
         self.rect.move_ip(self._vector)
 
-    def hit(self, enemies):
+    def _hit(self, enemies):
         """Funktio joka katsoo onko projecile osumassa viholliseen, tällä hetkellä
 
         Args:
@@ -67,14 +67,14 @@ class Projectile:
                 has_hit = True
         return has_hit
 
-    def explode(self,):
+    def _explode(self,):
         self.rect.inflate_ip(
             self._proj_attrs["area"] * 2, self._proj_attrs["area"] * 2)
         self._proj_attrs["proj_speed"] = 0.1
         self._proj_attrs["pierce"] = 100
         self._proj_attrs["explode"] = False
 
-    def pool(self):
+    def _pool(self):
         self.rect.inflate_ip(
             self._proj_attrs["area"] * 1.5, self._proj_attrs["area"] * 1.5)
         self._proj_attrs["proj_speed"] = 0.1

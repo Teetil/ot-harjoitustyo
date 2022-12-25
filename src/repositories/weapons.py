@@ -1,7 +1,7 @@
-from random import choice
 from math import ceil
 import pygame
 from objects.projectile import Projectile
+
 
 class Weapon:
     """Luokka mistä kaikku muut aseet perivät
@@ -21,8 +21,8 @@ class Weapon:
             last_shot: aika milloin viimeinen ammunta tapahtui
         """
         self.proj_attrs = dict(weapon_attrs)
-        self.cooldown = weapon_attrs["cooldown"]
-        self.quantity = weapon_attrs["quantity"]
+        self._cooldown = weapon_attrs["cooldown"]
+        self._quantity = weapon_attrs["quantity"]
         self.last_shot = 0
         self.active = active
         self.color = color
@@ -37,7 +37,7 @@ class Weapon:
         Returns:
             bool: True jos aseen kuuluisi ampua
         """
-        return current_time - self.last_shot >= self.cooldown
+        return current_time - self.last_shot >= self._cooldown
 
     def shoot_nearest(self, player, enemies: list) -> list:
         """Funktio joka palauttaa projectilen
@@ -49,7 +49,7 @@ class Weapon:
         Returns:
             projectile: Palauttaa projectile olion, joka liikkuu lähintä vihollista päin
         """
-        enemies = self.get_nearest(player, enemies)
+        enemies = self._get_nearest(player, enemies)
         if not enemies:
             return None
         projectiles = []
@@ -60,7 +60,7 @@ class Weapon:
             )
         return projectiles
 
-    def get_nearest(self, player, enemies):
+    def _get_nearest(self, player, enemies):
         """Funktio joka palauttaa vektorin lähintä vihollista kohti
 
         Args:
@@ -77,19 +77,19 @@ class Weapon:
             enemy_vect.append(pygame.math.Vector2(
                 enemy.rect.centerx - player.rect.centerx, enemy.rect.centery - player.rect.centery))
         enemy_vect.sort(key=lambda n: n.length())
-        return enemy_vect[0:ceil(self.quantity)]
+        return enemy_vect[0:ceil(self._quantity)]
 
     def upgrade_random(self):
         var_list = list(self.proj_attrs.keys())
         var_list.extend(["cooldown", "quantity"])
         var_to_upgrade = self._randomizer.choice_list(var_list)
         if var_to_upgrade == "cooldown":
-            self.cooldown *= 0.9
+            self._cooldown *= 0.9
             return
         if var_to_upgrade == "quantity":
-            self.quantity += 1
+            self._quantity += 1
             return
-        self.proj_attrs[var_to_upgrade] *= 1.1
+        self.proj_attrs[var_to_upgrade] *= 1.3
 
 
 class Wand(Weapon):
@@ -106,13 +106,13 @@ class Wand(Weapon):
 
 class Fireball(Weapon):
     def __init__(self, weapon_attrs, randomizer, active=False) -> None:
-        super().__init__(weapon_attrs, randomizer,active)
+        super().__init__(weapon_attrs, randomizer, active)
         self.color = (255, 0, 0)
         self.proj_attrs["explode"] = True
 
 
 class AcidPool(Weapon):
     def __init__(self, weapon_attrs, randomizer, active=False) -> None:
-        super().__init__(weapon_attrs, randomizer,active)
+        super().__init__(weapon_attrs, randomizer, active)
         self.color = (0, 200, 0)
         self.proj_attrs["pool"] = True

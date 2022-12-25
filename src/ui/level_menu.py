@@ -14,32 +14,32 @@ class LevelMenu:
     def level_up_menu(self):
         self._window.fill((0, 0, 0))
         if not self.decision:
-            self.decision = self.upgrade_choice()
+            self.decision = self._upgrade_choice()
             return
         elif self.decision == 1:
-            return self.upgrade_weapons()
+            return self._upgrade_weapons()
         elif self.decision == 2:
-            return self.new_weapon()
+            return self._new_weapon()
         elif self.decision == 3:
             self.decision = 0
             return self._stage.player.heal_to_full()
 
-    def upgrade_choice(self):
-        buttons = self.draw_choice_buttons()
-        self.draw_choice_text(buttons)
+    def _upgrade_choice(self):
+        buttons = self._draw_choice_buttons()
+        self._draw_choice_text(buttons)
         pygame.display.update()
-        click_res = self.check_click(buttons, pygame.mouse.get_pressed())
+        click_res = self._check_click(buttons, pygame.mouse.get_pressed())
         if click_res == buttons[0]:
             return 1
-        elif click_res == buttons[1]:
+        elif len(buttons) > 2 and click_res == buttons[1]:
             return 2
         elif len(buttons) > 2 and click_res == buttons[2]:
             return 3
-        elif len(buttons) < 2 and click_res == buttons[1]:
+        elif len(buttons) <= 2 and click_res == buttons[1]:
             return 3
         return 0
 
-    def check_click(self, rects, mouse_state):
+    def _check_click(self, rects, mouse_state):
         if mouse_state[0]:
             mouse_pos = pygame.mouse.get_pos()
             for rect in rects:
@@ -47,35 +47,35 @@ class LevelMenu:
                     return rect
         return None
 
-    def upgrade_weapons(self):
+    def _upgrade_weapons(self):
         active = self._stage.get_active_weapons()
         to_upgrade = sample(active, k=max(1, len(active)))
         to_upgrade.sort(key=lambda x: type(x).__name__)
-        weapon_to_upgrade = self.draw_weapon_level_up(to_upgrade)
+        weapon_to_upgrade = self._draw_weapon_level_up(to_upgrade)
         if weapon_to_upgrade:
             weapon_to_upgrade[0][0].upgrade_random()
             self.decision = 0
             return True
         return False
 
-    def new_weapon(self):
+    def _new_weapon(self):
         non_active = self._stage.get_inactive_weapons()
-        new_weapon = self.draw_weapon_level_up(non_active)
+        new_weapon = self._draw_weapon_level_up(non_active)
         if new_weapon:
             new_weapon[0][0].active = True
             self.decision = 0
             return True
         return False
 
-    def draw_weapon_level_up(self, weapons: list):
-        rects = self.draw_weapon_upgrades(weapons)
+    def _draw_weapon_level_up(self, weapons: list):
+        rects = self._draw_weapon_upgrades(weapons)
         weapons_rects = list(zip(weapons, rects))
-        self.draw_weapon_text(weapons_rects)
+        self._draw_weapon_text(weapons_rects)
         pygame.display.update()
-        click_res = self.check_click(rects, pygame.mouse.get_pressed())
+        click_res = self._check_click(rects, pygame.mouse.get_pressed())
         return [n for n in weapons_rects if n[1] == click_res]
 
-    def draw_choice_buttons(self):
+    def _draw_choice_buttons(self):
         rects = []
         btn_width = self._window.get_width() // 5
         btn_heigth = self._window.get_height() // 10
@@ -93,7 +93,7 @@ class LevelMenu:
             pygame.draw.rect(self._window, self._button_color, rect)
         return rects
 
-    def draw_choice_text(self, buttons):
+    def _draw_choice_text(self, buttons):
         choice1 = self._font.render("Upgrade weapons", True, self._txt_color)
         choice2 = self._font.render("Choose new weapon", True, self._txt_color)
         choice3 = self._font.render("Heal to full hp", True, self._txt_color)
@@ -111,7 +111,7 @@ class LevelMenu:
         self._window.blit(choice3, (choice3_pos))
         self._window.blit(choice1, (choice1_pos))
 
-    def draw_weapon_upgrades(self, weapons):
+    def _draw_weapon_upgrades(self, weapons):
         btn_width = self._window.get_width() // 3
         btn_heigth = self._window.get_height() // 10
         btn_interval = self._window.get_height() // (len(weapons) + 1)
@@ -123,7 +123,7 @@ class LevelMenu:
             pygame.draw.rect(self._window, self._button_color, btn_rect)
         return btn_rects
 
-    def draw_upgrade_text(self, weapons_rects):
+    def _draw_upgrade_text(self, weapons_rects):
         for weapon, rect in weapons_rects:
             text = self._font.render(
                 f"Upgrade random stat of {type(weapon).__name__}", True, (255, 255, 255))
@@ -131,7 +131,7 @@ class LevelMenu:
                 rect.height // 2 - text.get_height() // 2
             self._window.blit(text, (text_pos))
 
-    def draw_new_weapon_text(self, weapon_rects: list):
+    def _draw_new_weapon_text(self, weapon_rects: list):
         for weapon, rect in weapon_rects:
             text = self._font.render(
                 f"Upgrade random stat of {type(weapon).__name__}", True, (255, 255, 255))
@@ -139,7 +139,7 @@ class LevelMenu:
                 rect.height // 2 - text.get_height() // 2
             self._window.blit(text, (text_pos))
 
-    def draw_weapon_text(self, weapon_rects):
+    def _draw_weapon_text(self, weapon_rects):
         for weapon, rect in weapon_rects:
             if weapon.active:
                 text = self._font.render(

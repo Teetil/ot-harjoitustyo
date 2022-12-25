@@ -33,7 +33,7 @@ class Stage():
         self._level_handler = level_handler
         self.enemies = []
         self.player = player
-        weapon_attrs = self.load_weapon_attrs()
+        weapon_attrs = self._load_weapon_attrs()
 
         self.weapons = [
             Fireball(weapon_attrs["Fireball"], Random()),
@@ -58,18 +58,18 @@ class Stage():
             self.enemies += self._wave_handler.spawn_wave(
                 self._field_size, self._difficulty_stat[0])
             self._wave_handler.last_move = current_time
-        self.update_enemies()
-        self.update_weapons(current_time, self.weapons)
-        self.update_projectiles()
-        self.update_experience_orbs(self.experience_gems)
-        if self.should_scale_difficulty(current_time):
+        self._update_enemies()
+        self._update_weapons(current_time, self.weapons)
+        self._update_projectiles()
+        self._update_experience_orbs(self.experience_gems)
+        if self._should_scale_difficulty(current_time):
             self._difficulty_stat = self._difficulty_stat[0] + \
                 1, self._difficulty_stat[1]
         if self.player.health <= 0:
             return False
         return True
 
-    def update_enemies(self):
+    def _update_enemies(self):
         for enemy in self.enemies:
             if enemy.update(self.player):
                 self.experience_gems.append(Experience(
@@ -77,27 +77,30 @@ class Stage():
                 self.enemies.remove(enemy)
                 self._score_handler.add_score(10, self._difficulty_stat[0])
 
-    def update_weapons(self, current_time, weapons):
+    def _update_weapons(self, current_time, weapons):
+        projectiles = []
         for weapon in weapons:
             if weapon.active and weapon.should_shoot(current_time):
                 weapon.last_shot = current_time
                 projectiles = weapon.shoot_nearest(self.player, self.enemies)
-                if projectiles:
-                    for proj in projectiles:
-                        self.projectiles.append(proj)
+                for proj in projectiles:
+                    self.projectiles.append(proj)
 
-    def update_projectiles(self):
+    def _update_projectiles(self):
         for projectile in self.projectiles:
             if projectile.update(self.enemies):
                 self.projectiles.remove(projectile)
 
-    def update_experience_orbs(self, experience_gems):
+    def _update_experience_orbs(self, experience_gems):
+        to_remove = []
         for experience in experience_gems:
             if experience.update(self.player):
                 self._level_handler.experience += experience.value
-                experience_gems.remove(experience)
+                to_remove.append(experience)
+        for experience in to_remove:
+            experience_gems.remove(experience)
 
-    def should_scale_difficulty(self, current_time):
+    def _should_scale_difficulty(self, current_time):
         return current_time - self._difficulty_stat[1] * self._difficulty_stat[0] > 0
 
     def get_active_weapons(self):
@@ -106,5 +109,5 @@ class Stage():
     def get_inactive_weapons(self):
         return [weapon for weapon in self.weapons if not weapon.active]
 
-    def load_weapon_attrs(self):
+    def _load_weapon_attrs(self):
         return DataHandler.load_weapon_attrs(r"default_stats.json")

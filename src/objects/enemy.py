@@ -34,13 +34,13 @@ class Enemy():
         Returns:
             bool: Palautta onko vihollinen kuollut vai ei
         """
-        self.move(player)
-        self.damage(player)
+        self._move(player)
+        self._damage_player(player)
         if self.health <= 0:
             return True
         return False
 
-    def move(self, player) -> None:
+    def _move(self, player) -> None:
         """Funktio joka liikuttaa vihollista
 
         Args:
@@ -58,7 +58,7 @@ class Enemy():
         self.rect.move_ip(dirvect)
         return True
 
-    def damage(self, player):
+    def _damage_player(self, player):
         """Funktio jolla vihollinen tekee vahinkoa pelaajaan
 
         Args:
