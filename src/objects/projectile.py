@@ -47,6 +47,8 @@ class Projectile:
     def _move(self):
         """Liikuttaa projectilea vektoria pitkin nopeudella
         """
+        if self._vector.length() == 0:
+            return
         self._vector.normalize()
         self._vector.scale_to_length(self._proj_attrs["proj_speed"])
         self.rect.move_ip(self._vector)
