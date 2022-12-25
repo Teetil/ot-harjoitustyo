@@ -28,4 +28,3 @@ class TestEnemy(unittest.TestCase):
         new_enemy = Enemy(10, 10, 5)
         self.assertEqual(50, new_enemy.health)
         self.assertEqual(2.8, new_enemy._move_speed)
-        self.assertEqual(3.6, new_enemy._damage)

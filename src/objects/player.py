@@ -5,7 +5,7 @@ class Player():
     """Luokka joka hoitaa pelaajan käyttäytymisen
     """
 
-    def __init__(self, pos_x: int, pos_y: int, window, health=100, move_speed=3, damage=1) -> None:
+    def __init__(self, pos_x: int, pos_y: int, window, health=100, move_speed=3.5, damage=1) -> None:
         """Luokan konstruktori
 
         Args:

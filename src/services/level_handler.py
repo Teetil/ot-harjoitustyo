@@ -4,7 +4,7 @@ class LevelHandler:
     """Luokka joka hallitsee pelaajan tasoa
     """
 
-    def __init__(self, base_xp_requirement: int = 100, growth_mod: float = 1.3) -> None:
+    def __init__(self, base_xp_requirement: int = 100, growth_mod: float = 1.5) -> None:
         """Luokan konstruktori
 
         Args:

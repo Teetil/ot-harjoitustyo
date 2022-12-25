@@ -36,7 +36,7 @@ class TestWeapon(unittest.TestCase):
 
     def test_shoot_nearest_no_enemies_works(self):
         res = self.test_weapon.shoot_nearest(self.player, [])
-        self.assertEqual(res, None)
+        self.assertEqual([], res)
 
     def test_upgrade_random_works(self):
         self.test_weapon.upgrade_random()

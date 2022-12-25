@@ -51,7 +51,7 @@ class Weapon:
         """
         enemies = self._get_nearest(player, enemies)
         if not enemies:
-            return None
+            return []
         projectiles = []
         for enemy in enemies:
             projectiles.append(

@@ -44,7 +44,7 @@ class Stage():
         self.projectiles = []
         self.experience_gems = []
         self._field_size = self._window.get_width()
-        self._difficulty_stat = (1, 20000)
+        self._difficulty_stat = (1, 30000)
 
     def update(self, current_time):
         """Päivittää kaikki kentällä olevat oliot

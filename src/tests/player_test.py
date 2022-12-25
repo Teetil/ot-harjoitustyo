@@ -17,7 +17,7 @@ class TestPlayer(unittest.TestCase):
     def test_can_move_left(self):
         self.test_key_list[97] = 1
         self.player.movement(self.test_key_list)
-        self.assertEqual(self.player.rect.x, 97)
+        self.assertEqual(self.player.rect.x, 96)
 
     def test_can_move_right(self):
         self.test_key_list[100] = 1
@@ -27,7 +27,7 @@ class TestPlayer(unittest.TestCase):
     def test_can_move_up(self):
         self.test_key_list[119] = 1
         self.player.movement(self.test_key_list)
-        self.assertEqual(self.player.rect.y, 97)
+        self.assertEqual(self.player.rect.y, 96)
 
     def test_can_move_down(self):
         self.test_key_list[115] = 1
