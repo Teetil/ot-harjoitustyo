@@ -1,4 +1,5 @@
 import pygame
+from random import choice
 from objects.projectile import Projectile
 
 
@@ -71,6 +72,10 @@ class Weapon:
             enemy_vect.append(pygame.math.Vector2(
                 enemy.rect.centerx - player.rect.centerx, enemy.rect.centery - player.rect.centery))
         return min(enemy_vect, key=lambda x: x.length())
+
+    def upgrade_random(self):
+        var_to_upgrade = choice(list(self.proj_attrs.keys()))
+        self.proj_attrs[var_to_upgrade] *= 1.1
 
 
 class Wand(Weapon):

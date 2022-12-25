@@ -5,7 +5,7 @@ class FieldRenderer():
     """Luokka joka renderöi pelikentän
     """
 
-    def __init__(self, window: pygame.surface, score_handler) -> None:
+    def __init__(self, window: pygame.surface, score_handler, level_handler) -> None:
         """Luokan konstruktori
 
         Args:
@@ -13,6 +13,7 @@ class FieldRenderer():
         """
         self.window = window
         self._score_handler = score_handler
+        self._level_handler = level_handler
         self.font = pygame.font.SysFont(None, 24)
 
     def render_field(self, player, enemies: list, projectiles: list, experience_gems : list) -> None:
@@ -28,6 +29,7 @@ class FieldRenderer():
         self.draw_player(player)
         self.draw_enemy(enemies)
         self.draw_experience(experience_gems)
+        self.draw_experience_bar()
         self.draw_text(player)
         pygame.display.update()
 
@@ -49,6 +51,11 @@ class FieldRenderer():
         for experience in experience_gems:
             pygame.draw.rect(self.window, (0, 50, 100), experience.rect)
 
+    def draw_experience_bar(self):
+        bar_heigth = self.window.get_height() - self.window.get_height() // 50
+        bar_progress = self._level_handler.experience / self._level_handler.experience_requirement * self.window.get_width()
+        pygame.draw.line(self.window, (0, 50, 100), (0, bar_heigth), (self.window.get_width(), bar_heigth))
+        pygame.draw.rect(self.window, (0, 50, 100), (0, bar_heigth, bar_progress, bar_heigth))
 
     def draw_text(self, player):
         """Pirtää pelaajan elämän ja pisteet näytölle

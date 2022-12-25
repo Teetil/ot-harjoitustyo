@@ -1,6 +1,5 @@
 from services.wave_handler import WaveHandler
 from services.randomizer import Random
-from services.level_handler import LevelHandler
 from repositories.weapons import *
 from objects.experience import Experience
 
@@ -8,7 +7,7 @@ class Stage():
     """Luokka joka hoitaa pelikentän toiminallisuuden
     """
 
-    def __init__(self, window, player, score_handler) -> None:
+    def __init__(self, window, player, score_handler, level_handler) -> None:
         """Luokan konstruktori
 
         Args:
@@ -29,10 +28,11 @@ class Stage():
         self._window = window
         self._wave_handler = WaveHandler(Random())
         self._score_handler = score_handler
-        self._level_handler = LevelHandler()
+        self._level_handler = level_handler
         self.enemies = []
         self.player = player
-        self.weapons = [Fireball(20, 1400, 5, 40, 1, 1)]
+        self.weapons = [Fireball(20, 1400, 5, 40, 1, 1),
+        AcidPool(5, 1400, 2, 10, 1, 1)]
         self.projectiles = []
         self._experience_gems = []
         self._field_size = self._window.get_width()
