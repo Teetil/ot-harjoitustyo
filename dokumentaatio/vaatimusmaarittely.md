@@ -6,8 +6,14 @@ Pieni [Vampire Survivors](https://store.steampowered.com/app/1794680/Vampire_Sur
 ## Käyttäjät
 Sovellus on yksinpelattava peli, joten siinä ei ole muita käyttäjiä kuin itse pelaaja
 
-## Tuleva toiminnallisuus
-- Ohjaat pelissä hahmoa, joka ampuu aalloittaan tulevia vihollisia automaattisesti [DONE] riippuen valitsemastasi aseista
-- Vihollisten tappamisesta saa pisteitä [DONE], joita pystyy käyttämään päivittämään aseita.
-- Jokaisen pelin jälkeen voi myös päivittää itse hahmoa
-- Peli tallentaa parhaan selvityn ajan
+## Toiminnalisuus
+- Ohjaat pelissä hahmoa, joka ampuu aalloittaan tulevia vihollisia automaattisesti riippuen valitsemastasi aseista
+- Vihollisten tappamisesta saa pisteitä ja XP:tä jolla voi kehittää aseita tai saada takaisin elämää
+- Pelin vaikeustaso nuosee kokoajan
+
+## Kehitysideoita
+- Itse pelihahmon päivittäminen aseidn lisäksi peline välissä
+- Uusien aseiden lisääminen
+- Uusien kenttien lisääminen
+- Erilaisten vihollisten lisääminen
+- "Balanceeminen"
