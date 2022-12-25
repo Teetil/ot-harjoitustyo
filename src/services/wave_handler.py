@@ -35,7 +35,7 @@ class WaveHandler():
             spawned.append(Enemy(spawn_x, spawn_y, difficulty))
         return spawned
 
-    def should_spawn(self, current_time: int) -> bool:
+    def should_spawn(self, current_time: int, difficulty : int) -> bool:
         """Funktio joka tarikistaa pitäisikö luoda vihollisia
 
         Args:
@@ -44,4 +44,4 @@ class WaveHandler():
         Returns:
             bool: True jos pitäisi luoda vihollsia False muuten
         """
-        return current_time - self.last_move >= self._wave_delay
+        return current_time - self.last_move >= self._wave_delay - difficulty * 75

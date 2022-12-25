@@ -21,8 +21,8 @@ class Enemy():
             move_speed (int, optional): Defaults to 2.
         """
         self._health = health * difficulty
-        self._damage = damage
-        self._move_speed = move_speed
+        self._damage = damage + difficulty
+        self._move_speed = move_speed + difficulty
         self.rect = pygame.Rect(pos_x, pos_y, 15, 30)
 
     def update(self, player):
