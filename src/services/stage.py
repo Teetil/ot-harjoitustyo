@@ -75,9 +75,10 @@ class Stage():
         for weapon in self.weapons:
             if weapon.active and weapon.should_shoot(current_time):
                 weapon.last_shot = current_time
-                proj = weapon.shoot_nearest(self.player, self.enemies)
-                if proj:
-                    self.projectiles.append(proj)
+                projectiles = weapon.shoot_nearest(self.player, self.enemies)
+                if projectiles:
+                    for proj in projectiles:
+                        self.projectiles.append(proj)
     
     def update_projectiles(self):
         for projectile in self.projectiles:

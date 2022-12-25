@@ -1,5 +1,6 @@
 import pygame
 from random import choice
+from math import ceil
 from objects.projectile import Projectile
 
 
@@ -41,7 +42,7 @@ class Weapon:
         """
         return current_time - self.last_shot >= self.cooldown
 
-    def shoot_nearest(self, player, enemies: list):
+    def shoot_nearest(self, player, enemies: list) -> list:
         """Funktio joka palauttaa projectilen
 
         Args:
@@ -51,10 +52,15 @@ class Weapon:
         Returns:
             projectile: Palauttaa projectile olion, joka liikkuu lähintä vihollista päin
         """
-        enemy = self.get_nearest(player, enemies)
-        if not enemy:
+        enemies = self.get_nearest(player, enemies)
+        if not enemies:
             return None
-        return Projectile((player.rect.centerx, player.rect.centery), enemy, self.color, self.proj_attrs)
+        projectiles = []
+        for enemy in enemies:
+            projectiles.append(
+                Projectile((player.rect.centerx, player.rect.centery), enemy, self.color, self.proj_attrs)
+            )
+        return projectiles
 
     def get_nearest(self, player, enemies):
         """Funktio joka palauttaa vektorin lähintä vihollista kohti
@@ -72,7 +78,8 @@ class Weapon:
         for enemy in enemies:
             enemy_vect.append(pygame.math.Vector2(
                 enemy.rect.centerx - player.rect.centerx, enemy.rect.centery - player.rect.centery))
-        return min(enemy_vect, key=lambda x: x.length())
+        enemy_vect.sort(key=lambda n: n.length())
+        return enemy_vect[0:ceil(self.quantity)]
 
     def upgrade_random(self):
         var_list = list(self.proj_attrs.keys())
