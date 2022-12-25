@@ -23,8 +23,10 @@ class MainLoop:
                               window.get_height() // 2, window)
         self._score_handler = ScoreHandler()
         self._level_handler = LevelHandler()
-        self._stage = Stage(window, self._player, self._score_handler, self._level_handler)
-        self._renderer = FieldRenderer(window, self._score_handler, self._level_handler)
+        self._stage = Stage(window, self._player,
+                            self._score_handler, self._level_handler)
+        self._renderer = FieldRenderer(
+            window, self._score_handler, self._level_handler)
         self._level_menu = LevelMenu(window, self._stage)
 
     def loop(self) -> None:
@@ -41,11 +43,11 @@ class MainLoop:
                 if not self._stage.update(self.get_time()):
                     return self._score_handler.get_score()
                 self._renderer.render_field(
-                    self._player, self._stage.enemies, self._stage.projectiles, self._stage._experience_gems)
+                    self._player, self._stage.enemies, self._stage.projectiles, self._stage.experience_gems)
             else:
                 if self._level_menu.level_up_menu():
                     self._level_handler.paused = False
-            
+
             self._clock.tick(60)
 
     def _event_handler(self) -> bool:

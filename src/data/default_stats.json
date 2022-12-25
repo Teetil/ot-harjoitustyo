@@ -1,0 +1,26 @@
+{
+    "Fireball" :{
+        "damage" : 20,
+        "proj_speed" : 5,
+        "area" : 40,
+        "pierce" : 1,
+        "cooldown" : 1400,
+        "quantity" : 1
+    },
+    "AcidPool" :{
+        "damage" : 4,
+        "proj_speed" : 3,
+        "area" : 30,
+        "pierce" : 1,
+        "cooldown" : 2000,
+        "quantity" : 1
+    },
+    "Wand" :{
+        "damage" : 10,
+        "proj_speed" : 10,
+        "area" : 15,
+        "pierce" : 2,
+        "cooldown" : 700,
+        "quantity" : 1
+    }
+}

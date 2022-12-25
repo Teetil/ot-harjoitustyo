@@ -1,6 +1,6 @@
-import pygame
 from random import choice
 from math import ceil
+import pygame
 from objects.projectile import Projectile
 
 
@@ -8,7 +8,7 @@ class Weapon:
     """Luokka mistä kaikku muut aseet perivät
     """
 
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, active = False) -> None:
+    def __init__(self, weapon_attrs, active=False, color=None) -> None:
         """Luokan konstruktori
 
         Args:
@@ -21,15 +21,12 @@ class Weapon:
         Attributes:
             last_shot: aika milloin viimeinen ammunta tapahtui
         """
-        self.proj_attrs = {}
-        self.proj_attrs["damage"] = damage
-        self.proj_attrs["proj_speed"] = proj_speed
-        self.proj_attrs["area"] = area
-        self.proj_attrs["pierce"] = pierce
-        self.cooldown = cooldown
-        self.quantity = quantity
+        self.proj_attrs = dict(weapon_attrs)
+        self.cooldown = weapon_attrs["cooldown"]
+        self.quantity = weapon_attrs["quantity"]
         self.last_shot = 0
         self.active = active
+        self.color = color
 
     def should_shoot(self, current_time: int) -> bool:
         """Funktio joka palauttaa true jos aseen pitöisi ampua
@@ -58,7 +55,8 @@ class Weapon:
         projectiles = []
         for enemy in enemies:
             projectiles.append(
-                Projectile((player.rect.centerx, player.rect.centery), enemy, self.color, self.proj_attrs)
+                Projectile((player.rect.centerx, player.rect.centery),
+                           enemy, self.color, self.proj_attrs)
             )
         return projectiles
 
@@ -88,7 +86,7 @@ class Weapon:
         if var_to_upgrade == "cooldown":
             self.cooldown *= 0.9
             return
-        elif var_to_upgrade == "quantity":
+        if var_to_upgrade == "quantity":
             self.quantity += 1
             return
         self.proj_attrs[var_to_upgrade] *= 1.1
@@ -101,19 +99,20 @@ class Wand(Weapon):
         Weapon (Weapon): luokka mistä ase perii
     """
 
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, active = False) -> None:
-        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce, active)
+    def __init__(self, weapon_attrs, active=False) -> None:
+        super().__init__(weapon_attrs, active)
         self.color = (0, 255, 255)
 
 
 class Fireball(Weapon):
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, active = False) -> None:
-        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce, active)
+    def __init__(self, weapon_attrs, active=False) -> None:
+        super().__init__(weapon_attrs, active)
         self.color = (255, 0, 0)
         self.proj_attrs["explode"] = True
 
+
 class AcidPool(Weapon):
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, active = False) -> None:
-        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce, active)
+    def __init__(self, weapon_attrs, active=False) -> None:
+        super().__init__(weapon_attrs, active)
         self.color = (0, 200, 0)
         self.proj_attrs["pool"] = True

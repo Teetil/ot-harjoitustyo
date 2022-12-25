@@ -5,7 +5,7 @@ class Projectile:
     """Luokka joka hoitaa pelaajan aseiden ampumien projectilejen toiminnallisuuden
     """
 
-    def __init__(self, coordinates : tuple, vector: pygame.Vector2, color : tuple, proj_attrs : dict) -> None:
+    def __init__(self, coordinates: tuple, vector: pygame.Vector2, color: tuple, proj_attrs: dict) -> None:
         """Luokan konstruktori
 
         Args:
@@ -14,7 +14,8 @@ class Projectile:
             color (tuple) : tuple joka sisältää projektilen rendröintivärin muodossa (R, G, B)
             proj_attrs (dict) : dictionary joka sisältää projectilen attribuutit kuten damagen ja nopeuden
         """
-        self.rect = pygame.Rect(coordinates[0], coordinates[1], proj_attrs["area"], proj_attrs["area"])
+        self.rect = pygame.Rect(
+            coordinates[0], coordinates[1], proj_attrs["area"], proj_attrs["area"])
         self._vector = vector
         self._proj_attrs = dict(proj_attrs)
         self.color = color
@@ -31,13 +32,13 @@ class Projectile:
         """
         self.move()
         if self.hit(enemies):
-            if "explode" in self._proj_attrs and self._proj_attrs["explode"] == True:
+            if "explode" in self._proj_attrs and self._proj_attrs["explode"]:
                 self.explode()
                 return False
-            if "pool" in self._proj_attrs and self._proj_attrs["pool"] == True:
+            if "pool" in self._proj_attrs and self._proj_attrs["pool"]:
                 self.pool()
                 return False
-        if "explode" in self._proj_attrs and self._proj_attrs["explode"] == False:
+        if "explode" in self._proj_attrs and not self._proj_attrs["explode"]:
             self._proj_attrs["pierce"] -= 25
         if self._proj_attrs["pierce"] <= 0:
             return True
@@ -66,15 +67,16 @@ class Projectile:
                 has_hit = True
         return has_hit
 
-
     def explode(self,):
-        self.rect.inflate_ip(self._proj_attrs["area"] * 2, self._proj_attrs["area"] * 2)
+        self.rect.inflate_ip(
+            self._proj_attrs["area"] * 2, self._proj_attrs["area"] * 2)
         self._proj_attrs["proj_speed"] = 0.1
         self._proj_attrs["pierce"] = 100
         self._proj_attrs["explode"] = False
 
     def pool(self):
-        self.rect.inflate_ip(self._proj_attrs["area"] * 1.5, self._proj_attrs["area"] * 1.5)
+        self.rect.inflate_ip(
+            self._proj_attrs["area"] * 1.5, self._proj_attrs["area"] * 1.5)
         self._proj_attrs["proj_speed"] = 0.1
         self._proj_attrs["pierce"] = 10
         self._proj_attrs["pool"] = False

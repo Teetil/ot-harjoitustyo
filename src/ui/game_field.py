@@ -16,7 +16,7 @@ class FieldRenderer():
         self._level_handler = level_handler
         self.font = pygame.font.SysFont(None, 24)
 
-    def render_field(self, player, enemies: list, projectiles: list, experience_gems : list) -> None:
+    def render_field(self, player, enemies: list, projectiles: list, experience_gems: list) -> None:
         """General funktio pelikentän piirtämiselle, joka kutsuu kaikki muut piirtofunktiot
 
         Args:
@@ -46,16 +46,19 @@ class FieldRenderer():
     def draw_projectiles(self, projectiles: list) -> None:
         for projectile in projectiles:
             pygame.draw.rect(self.window, projectile.color, projectile.rect)
-    
-    def draw_experience(self, experience_gems : list) -> None:
+
+    def draw_experience(self, experience_gems: list) -> None:
         for experience in experience_gems:
             pygame.draw.rect(self.window, (0, 50, 100), experience.rect)
 
     def draw_experience_bar(self):
         bar_heigth = self.window.get_height() - self.window.get_height() // 50
-        bar_progress = self._level_handler.experience / self._level_handler.experience_requirement * self.window.get_width()
-        pygame.draw.line(self.window, (0, 50, 100), (0, bar_heigth), (self.window.get_width(), bar_heigth))
-        pygame.draw.rect(self.window, (0, 50, 100), (0, bar_heigth, bar_progress, bar_heigth))
+        bar_progress = self._level_handler.experience / \
+            self._level_handler.experience_requirement * self.window.get_width()
+        pygame.draw.line(self.window, (0, 50, 100), (0, bar_heigth),
+                         (self.window.get_width(), bar_heigth))
+        pygame.draw.rect(self.window, (0, 50, 100),
+                         (0, bar_heigth, bar_progress, bar_heigth))
 
     def draw_text(self, player):
         """Pirtää pelaajan elämän ja pisteet näytölle
