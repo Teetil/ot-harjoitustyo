@@ -7,7 +7,7 @@ class Weapon:
     """Luokka mistä kaikku muut aseet perivät
     """
 
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, color = (255, 255, 255)) -> None:
+    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, active = False) -> None:
         """Luokan konstruktori
 
         Args:
@@ -28,6 +28,7 @@ class Weapon:
         self.cooldown = cooldown
         self.quantity = quantity
         self.last_shot = 0
+        self.active = active
 
     def should_shoot(self, current_time: int) -> bool:
         """Funktio joka palauttaa true jos aseen pitöisi ampua
@@ -74,7 +75,15 @@ class Weapon:
         return min(enemy_vect, key=lambda x: x.length())
 
     def upgrade_random(self):
-        var_to_upgrade = choice(list(self.proj_attrs.keys()))
+        var_list = list(self.proj_attrs.keys())
+        var_list.extend(["cooldown", "quantity"])
+        var_to_upgrade = choice(var_list)
+        if var_to_upgrade == "cooldown":
+            self.cooldown *= 0.9
+            return
+        elif var_to_upgrade == "quantity":
+            self.quantity += 1
+            return
         self.proj_attrs[var_to_upgrade] *= 1.1
 
 
@@ -85,19 +94,19 @@ class Wand(Weapon):
         Weapon (Weapon): luokka mistä ase perii
     """
 
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce) -> None:
-        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce)
+    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, active = False) -> None:
+        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce, active)
         self.color = (0, 255, 255)
 
 
 class Fireball(Weapon):
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce) -> None:
-        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce)
+    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, active = False) -> None:
+        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce, active)
         self.color = (255, 0, 0)
         self.proj_attrs["explode"] = True
 
 class AcidPool(Weapon):
-    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce,) -> None:
-        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce)
+    def __init__(self, damage, cooldown, proj_speed, area, quantity, pierce, active = False) -> None:
+        super().__init__(damage, cooldown, proj_speed, area, quantity, pierce, active)
         self.color = (0, 200, 0)
         self.proj_attrs["pool"] = True

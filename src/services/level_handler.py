@@ -2,7 +2,7 @@
 
 class LevelHandler:
 
-    def __init__(self, base_xp_requirement : int = 100, growth_mod : float = 1.5) -> None:
+    def __init__(self, base_xp_requirement : int = 100, growth_mod : float = 1.3) -> None:
         self._experience = 0
         self._current_level = 1
         self._growth_mod = growth_mod
@@ -10,8 +10,8 @@ class LevelHandler:
         self.paused = False
 
     def level_up(self):
-        pass
         self.paused = True
+        self._current_level += 1
         
 
     def should_level(self):
@@ -31,4 +31,4 @@ class LevelHandler:
 
     @property
     def experience_requirement(self):
-        return self._base_requirement * self._growth_mod * self._current_level
+        return self._base_requirement * self._current_level ** self._growth_mod

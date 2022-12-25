@@ -41,6 +41,10 @@ class Player():
             if not self.rect.y > self.window.get_height() - self.rect.height:
                 self.rect.y += self.move_speed
 
+    def heal_to_full(self):
+        self._health = 100
+        return True
+
     @property
     def health(self):
         return self._health
