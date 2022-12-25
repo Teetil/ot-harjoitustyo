@@ -59,9 +59,9 @@ class Stage():
                 self._field_size, self._difficulty_stat[0])
             self._wave_handler.last_move = current_time
         self.update_enemies()
-        self.update_weapons(current_time)
+        self.update_weapons(current_time, self.weapons)
         self.update_projectiles()
-        self.update_experience_orbs()
+        self.update_experience_orbs(self.experience_gems)
         if self.should_scale_difficulty(current_time):
             self._difficulty_stat = self._difficulty_stat[0] + \
                 1, self._difficulty_stat[1]
@@ -77,8 +77,8 @@ class Stage():
                 self.enemies.remove(enemy)
                 self._score_handler.add_score(10, self._difficulty_stat[0])
 
-    def update_weapons(self, current_time):
-        for weapon in self.weapons:
+    def update_weapons(self, current_time, weapons):
+        for weapon in weapons:
             if weapon.active and weapon.should_shoot(current_time):
                 weapon.last_shot = current_time
                 projectiles = weapon.shoot_nearest(self.player, self.enemies)
@@ -91,11 +91,11 @@ class Stage():
             if projectile.update(self.enemies):
                 self.projectiles.remove(projectile)
 
-    def update_experience_orbs(self):
-        for experience in self.experience_gems:
+    def update_experience_orbs(self, experience_gems):
+        for experience in experience_gems:
             if experience.update(self.player):
                 self._level_handler.experience += experience.value
-                self.experience_gems.remove(experience)
+                experience_gems.remove(experience)
 
     def should_scale_difficulty(self, current_time):
         return current_time - self._difficulty_stat[1] * self._difficulty_stat[0] > 0
