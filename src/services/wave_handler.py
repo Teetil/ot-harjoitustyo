@@ -16,7 +16,7 @@ class WaveHandler():
         """
         self._wave_delay = 2000
         self.last_move = 0
-        self._wave_count = 5
+        self._wave_count = 4
         self._randomizer = randomizer
 
     def spawn_wave(self, field_size: int, difficulty: int) -> list:
@@ -29,7 +29,7 @@ class WaveHandler():
             list: lista luoduista vihollisista
         """
         spawned = []
-        for dir_mod in range(self._wave_count):
+        for dir_mod in range(self._wave_count + difficulty):
             spawn_x, spawn_y = self._randomizer.random_spawn(
                 field_size, dir_mod)
             spawned.append(Enemy(spawn_x, spawn_y, difficulty))

@@ -1,6 +1,8 @@
 
 
 class ScoreHandler():
+    """Apuluokka hoitamaan pelaajan pisteiden seuraamisen
+    """
     def __init__(self) -> None:
         self._score = 0
 

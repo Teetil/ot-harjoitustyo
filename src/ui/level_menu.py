@@ -3,25 +3,33 @@ from random import sample
 
 
 class LevelMenu:
+    """Luokka joka hallitsee level up menun piirtämisen ja toiminnan
+    """
     def __init__(self, window, stage) -> None:
+        """Luokan konstruktori
+
+        Args:
+            window (pygame.Surface): Alusta jolle piirtää
+            stage (Stage): Stage olio aseiden tiedon hakua varten
+        """
         self._window = window
         self._stage = stage
         self._font = pygame.font.SysFont(None, 24)
         self._button_color = (100, 100, 100)
         self._txt_color = (255, 255, 255)
-        self.decision = 0
+        self._decision = 0
 
     def level_up_menu(self):
         self._window.fill((0, 0, 0))
-        if not self.decision:
-            self.decision = self._upgrade_choice()
+        if not self._decision:
+            self._decision = self._upgrade_choice()
             return
-        elif self.decision == 1:
+        elif self._decision == 1:
             return self._upgrade_weapons()
-        elif self.decision == 2:
+        elif self._decision == 2:
             return self._new_weapon()
-        elif self.decision == 3:
-            self.decision = 0
+        elif self._decision == 3:
+            self._decision = 0
             return self._stage.player.heal_to_full()
 
     def _upgrade_choice(self):
@@ -54,7 +62,7 @@ class LevelMenu:
         weapon_to_upgrade = self._draw_weapon_level_up(to_upgrade)
         if weapon_to_upgrade:
             weapon_to_upgrade[0][0].upgrade_random()
-            self.decision = 0
+            self._decision = 0
             return True
         return False
 
@@ -63,7 +71,7 @@ class LevelMenu:
         new_weapon = self._draw_weapon_level_up(non_active)
         if new_weapon:
             new_weapon[0][0].active = True
-            self.decision = 0
+            self._decision = 0
             return True
         return False
 

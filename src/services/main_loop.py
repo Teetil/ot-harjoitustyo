@@ -13,10 +13,10 @@ class MainLoop:
     """
 
     def __init__(self, window) -> None:
-        """Luokan konstruktori, joka kutsutaan kun peli aloitetaan
+        """Luokan konstruktori
 
         Args:
-            window (pygame.surface): surface, jolle peli piirretään
+            window (pygame.Surface): Taso jolle pelikenttä renderöidään
         """
         self._clock = pygame.time.Clock()
         self._player = Player(window.get_width() // 2,
@@ -31,9 +31,10 @@ class MainLoop:
 
     def loop(self) -> None:
         """Pelin sydän. Loop joka pahatuu 60 kertaa sekunissa ja hoitaa suuren osan live toiminnalisuudesta
+        Pelin normaali rendröinti ja muut toiminnot pysähtyy jos level_handler asettaa tauon päälle
 
         Returns:
-            int: Funktio palauttaa pelaajan pisteet jos hän kuolee, jos peli exitataan muulla tavalla palautta None
+            int: Funktio palauttaa pelaajan pisteet jos pelaaja kuolee, jos peli exitataan muulla tavalla palautta None
         """
         while True:
             if not self._event_handler():

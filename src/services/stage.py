@@ -20,11 +20,12 @@ class Stage():
             score_handler: luokka joka hallitsee pisteiden saamista
             level_handler: luokka joka hallitsee pelaajan experiencen ja levelin
             enemies: lista hengissä olevista vihollisista kentälä
+            weapon_attrs: JSON tiedostosta ladatut aseiden aloitusatribuutit
             weapons: pelaajan omaavat aseet
             projectiles: lista elävistä projectileista
             experience_gems: lista olemassa olevista experince olioista
             field_size: kentän koko
-            difficulty_mod: numero, millä lisätä vihollisten nopeutta ja elämää
+            difficulty_stat: tuple josta ensimmäinen luku on nykyinen vaikeustaso ja toinen luku kuinka osen taso nuosee millisekuneissa
 
         """
         self._window = window
@@ -104,9 +105,19 @@ class Stage():
         return current_time - self._difficulty_stat[1] * self._difficulty_stat[0] > 0
 
     def get_active_weapons(self):
+        """Apumetodi joka hakee kaikki tällä hetkellä aktiiviset pelaajan aseet
+
+        Returns:
+            list: lista aktiivisista aseista
+        """
         return [weapon for weapon in self.weapons if weapon.active]
 
     def get_inactive_weapons(self):
+        """Apumetodi joka hakee kaikki tällä hetkellä inactiiviset pelaajan aseet
+
+        Returns:
+            list: lista inaktiivisista aseista
+        """
         return [weapon for weapon in self.weapons if not weapon.active]
 
     def _load_weapon_attrs(self):

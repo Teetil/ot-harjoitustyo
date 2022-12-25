@@ -47,7 +47,7 @@ class Weapon:
             enemies (list): lista vihollisista, mitä etsiä
 
         Returns:
-            projectile: Palauttaa projectile olion, joka liikkuu lähintä vihollista päin
+            list (Projectile): Palauttaa projectile lista, jotka liikkuvat lähimpiä viholisia päin
         """
         enemies = self._get_nearest(player, enemies)
         if not enemies:
@@ -80,6 +80,8 @@ class Weapon:
         return enemy_vect[0:ceil(self._quantity)]
 
     def upgrade_random(self):
+        """Funktio joka päivittää prosentuaalisesti satunnaista aseen ominaisuutta
+        """
         var_list = list(self.proj_attrs.keys())
         var_list.extend(["cooldown", "quantity"])
         var_to_upgrade = self._randomizer.choice_list(var_list)
@@ -105,6 +107,11 @@ class Wand(Weapon):
 
 
 class Fireball(Weapon):
+    """Ase joka ampuu hitaammin punaisen pallon joka laajenee osuessaan viholliseen ja katoaa
+
+    Args:
+        Weapon (Weapon): luokka mistä ase perii
+    """
     def __init__(self, weapon_attrs, randomizer, active=False) -> None:
         super().__init__(weapon_attrs, randomizer, active)
         self.color = (255, 0, 0)
@@ -112,6 +119,11 @@ class Fireball(Weapon):
 
 
 class AcidPool(Weapon):
+    """Ase joka ampuu viherän pallon joka luo pysyvän ansan maahan kunnes se tekee vahinkonsa loppuun
+
+    Args:
+        Weapon (Weapon): Luokka josta ase perii
+    """
     def __init__(self, weapon_attrs, randomizer, active=False) -> None:
         super().__init__(weapon_attrs, randomizer, active)
         self.color = (0, 200, 0)

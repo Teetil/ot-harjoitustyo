@@ -5,11 +5,13 @@ class FieldRenderer():
     """Luokka joka renderöi pelikentän
     """
 
-    def __init__(self, window: pygame.surface, score_handler, level_handler) -> None:
+    def __init__(self, window: pygame.Surface, score_handler, level_handler) -> None:
         """Luokan konstruktori
 
         Args:
-            window (pygame.surface): alusta jolle pirtää pelikenttä
+            window (pygame.Surface): alusta jolle pirtää pelikenttä
+            score_handler: pistehallitsa pisteiden kirjoittamista näytölle varten
+            level_handler: tason hallitsija XP palkin piirtämisen vuoksi
         """
         self.window = window
         self._score_handler = score_handler
@@ -23,35 +25,36 @@ class FieldRenderer():
             player (playe): pelaaja, joka piirtää
             enemies (list): viholliset jotka piirtää
             projectiles (list): projectilet jotka pirtää
+            experience_gems (lista): XP oliot jotka piirtää
         """
-        self.draw_window()
-        self.draw_projectiles(projectiles)
-        self.draw_player(player)
-        self.draw_enemy(enemies)
-        self.draw_experience(experience_gems)
-        self.draw_experience_bar()
-        self.draw_text(player)
+        self._draw_window()
+        self._draw_projectiles(projectiles)
+        self._draw_player(player)
+        self._draw_enemy(enemies)
+        self._draw_experience(experience_gems)
+        self._draw_experience_bar()
+        self._draw_text(player)
         pygame.display.update()
 
-    def draw_window(self) -> None:
+    def _draw_window(self) -> None:
         self.window.fill((80, 80, 80))
 
-    def draw_player(self, player) -> None:
+    def _draw_player(self, player) -> None:
         pygame.draw.rect(self.window, (0, 100, 0), player.rect)
 
-    def draw_enemy(self, enemies: list) -> None:
+    def _draw_enemy(self, enemies: list) -> None:
         for enemy in enemies:
             pygame.draw.rect(self.window, (100, 0, 0), enemy.rect)
 
-    def draw_projectiles(self, projectiles: list) -> None:
+    def _draw_projectiles(self, projectiles: list) -> None:
         for projectile in projectiles:
             pygame.draw.rect(self.window, projectile.color, projectile.rect)
 
-    def draw_experience(self, experience_gems: list) -> None:
+    def _draw_experience(self, experience_gems: list) -> None:
         for experience in experience_gems:
             pygame.draw.rect(self.window, (0, 50, 100), experience.rect)
 
-    def draw_experience_bar(self):
+    def _draw_experience_bar(self):
         bar_heigth = self.window.get_height() - self.window.get_height() // 50
         bar_progress = self._level_handler.experience / \
             self._level_handler.experience_requirement * self.window.get_width()
@@ -60,7 +63,7 @@ class FieldRenderer():
         pygame.draw.rect(self.window, (0, 50, 100),
                          (0, bar_heigth, bar_progress, bar_heigth))
 
-    def draw_text(self, player):
+    def _draw_text(self, player):
         """Pirtää pelaajan elämän ja pisteet näytölle
 
         Args:

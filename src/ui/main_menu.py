@@ -3,6 +3,11 @@ from services.main_loop import MainLoop
 
 
 def main_menu(window):
+    """Pelin main menun hoitava metodi
+
+    Args:
+        window (pygame.Surface): Alusta jolle menu piirretään
+    """
     run = True
     game_over = 0
     while run:
