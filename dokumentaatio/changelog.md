@@ -14,3 +14,11 @@
 - Main menu josta aloittaa peli 
 - Pisteiden saaminen vihollisia tappaessa
 - Palaaminen main menuun kuolessa vihollisille
+
+# Viikko 7
+- Viholliset pudottavat kerättäviä experience orbeja
+- Kun pelaaja kerää tarpeeksi xp:tä pystyy valitsemaan kolmen vaihtoehdon välillä
+- Aseita voi päivittää
+- Uusia aseita lisätty
+- Pelaaja voi saa elämää takaisin
+- Pelin vaikeistaso nousee ajan kuluessa loputtomiin
